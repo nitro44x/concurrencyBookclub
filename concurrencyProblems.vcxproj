@@ -140,7 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="problem1.cpp" />
+    <ClCompile Include="problem1_lockfree.cpp" />
+    <ClCompile Include="problem1_locking.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -42,7 +42,7 @@ void printThird() {
   g_cv.notify_all();
 }
 
-void locking() {
+void p1_locking() {
   std::thread first{printFirst};
   std::thread second{printSecond};
   std::thread third{printThird};
@@ -50,50 +50,4 @@ void locking() {
   first.join();
   second.join();
   third.join();
-}
-
-std::atomic_int g_atomicCounter(0);
-
-void printFirst_lockfree() {
-  std::this_thread::sleep_for(.5s);
-
-  while (g_atomicCounter != 0) {
-  }
-  print("first\n");
-  ++g_atomicCounter;
-}
-
-void printSecond_lockfree() {
-  std::this_thread::sleep_for(.25s);
-  while (g_atomicCounter != 1) {
-  }
-  print("second\n");
-  ++g_atomicCounter;
-}
-
-void printThird_lockfree() {
-  while (g_atomicCounter != 2) {
-  }
-  print("third\n");
-}
-
-void lockFree() {
-  std::thread first{printFirst_lockfree};
-  std::thread second{printSecond_lockfree};
-  std::thread third{printThird_lockfree};
-
-  first.join();
-  second.join();
-  third.join();
-}
-
-void problem1() {
-  std::cout << "-- locking --" << std::endl;
-  locking();
-
-  std::cout << std::endl << std::endl;
-  std::this_thread::sleep_for(2s);
-
-  std::cout << "-- lock free --" << std::endl;
-  lockFree();
 }
